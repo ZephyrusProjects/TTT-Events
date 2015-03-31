@@ -9,7 +9,9 @@ local disableEvent = false
 local function Give_Cloaks()
 
 	for k, _pl in pairs(player.GetAll()) do
-		_pl:Give("weapon_ttt_cloak")
+		if _pl:Alive() and !_pl:IsSpec() then
+			_pl:Give("weapon_ttt_cloak")
+		end
 	end
 	
 	GlobalChatMsg("All players have been given a cloak!")

@@ -10,11 +10,12 @@ local disableEvent = false
 local function HealthStation()
 
 	for k, _pl in pairs(player.GetAll()) do
-	
-		if _pl:GetRole() == ROLE_TRAITOR then
-			_pl:Give("weapon_ttt_painstation")
-		else
-			_pl:Give("weapon_ttt_health_station")
+		if _pl:Alive() and !_pl:IsSpec() then
+			if _pl:GetRole() == ROLE_TRAITOR then
+				_pl:Give("weapon_ttt_painstation")
+			else
+				_pl:Give("weapon_ttt_health_station")
+			end
 		end
 	end
 

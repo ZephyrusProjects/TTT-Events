@@ -9,7 +9,9 @@ local disableEvent = false
 local function ShrinkPlayers()
 
 	for k, _pl in pairs(player.GetAll()) do
-		_pl:SetModelScale( 0.60)
+		if _pl:Alive() and !_pl:IsSpec() then
+			_pl:SetModelScale( 0.60)
+		end
 	end
 
 	GlobalChatMsg("Honey I shrunk the kids!")

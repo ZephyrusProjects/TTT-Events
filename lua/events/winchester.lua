@@ -15,12 +15,14 @@ local function Give_Winchester()
 	end
 
 	for k, _pl in pairs(player.GetAll()) do
-		_pl:StripWeapons()
-		_pl:Give("weapon_zm_improvised")
-		_pl:Give("weapon_zm_carry")
-		_pl:Give("weapon_ttt_unarmed")
-		_pl:Give("weapon_ttt_winchester")
-		_pl:GiveAmmo(32, "Buckshot")
+		if _pl:Alive() and !_pl:IsSpec() then
+			_pl:StripWeapons()
+			_pl:Give("weapon_zm_improvised")
+			_pl:Give("weapon_zm_carry")
+			_pl:Give("weapon_ttt_unarmed")
+			_pl:Give("weapon_ttt_winchester")
+			_pl:GiveAmmo(32, "Buckshot")
+		end
 	end
 	
 	GlobalChatMsg("All players have been given a winchester!")

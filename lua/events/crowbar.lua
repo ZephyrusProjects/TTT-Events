@@ -15,9 +15,12 @@ local function Crowbar()
 	end
 
 	for k, _pl in pairs(player.GetAll()) do
-		_pl:StripWeapons()
-		_pl:Give("weapon_zm_improvised")
-		_pl:Give("weapon_zm_carry")
+		if _pl:Alive() and !_pl:IsSpec() then
+			_pl:StripWeapons()
+			_pl:Give("weapon_zm_improvised")
+			_pl:Give("weapon_zm_carry")
+			_pl:SetHealth(20)
+		end
 	end
 
 	GlobalChatMsg("All players have 20 hp and a crowbar!")

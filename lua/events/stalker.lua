@@ -9,18 +9,20 @@ local disableEvent = false
 local function Stalker()
 
 	for k, _pl in pairs(player.GetAll()) do
-		if _pl:GetRole() == ROLE_TRAITOR then
-			_pl:SetRenderMode( RENDERMODE_TRANSALPHA )
-			_pl:SetColor( Color(255, 255, 255, 0) )
-			_pl:DrawShadow(false)
-			_pl:SetNWBool("disguised", true) --TTT Bool, removes the Player Name when looking at them.
-			
-			timer.Create( "RoundEvents_InvisWeapons:".._pl:SteamID(), .2, 0, function()		--Gets a list of the players weapons and makes them invisible.
-				for k2,_wep in pairs(_pl:GetWeapons()) do
-					_wep:SetNoDraw(true)
-				end
-			end)	
-			
+		if _pl:Alive() and !_pl:IsSpec() then
+			if _pl:GetRole() == ROLE_TRAITOR then
+				_pl:SetRenderMode( RENDERMODE_TRANSALPHA )
+				_pl:SetColor( Color(255, 255, 255, 0) )
+				_pl:DrawShadow(false)
+				_pl:SetNWBool("disguised", true) --TTT Bool, removes the Player Name when looking at them.
+				
+				timer.Create( "RoundEvents_InvisWeapons:".._pl:SteamID(), .2, 0, function()		--Gets a list of the players weapons and makes them invisible.
+					for k2,_wep in pairs(_pl:GetWeapons()) do
+						_wep:SetNoDraw(true)
+					end
+				end)	
+				
+			end
 		end
 	end
 	
